@@ -23,6 +23,13 @@
 #include "usart.h"
 #include "gpio.h"
 
+
+
+char msg[100];
+
+
+
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -107,7 +114,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
+	  snprintf(msg, sizeof(msg), "HTS221 not detected! Read WHO_AM_Ihmmm \r\n");
+	  USART2_PutBuffer((uint8_t *)msg, strlen(msg));
+
+
+	/* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
