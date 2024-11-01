@@ -69,6 +69,16 @@ void MX_USART2_UART_Init(void)
   LL_DMA_SetPeriphSize(DMA1, LL_DMA_CHANNEL_7, LL_DMA_PDATAALIGN_BYTE);
 
   LL_DMA_SetMemorySize(DMA1, LL_DMA_CHANNEL_7, LL_DMA_MDATAALIGN_BYTE);
+/*moj kod*/
+  LL_DMA_SetPeriphAddress(DMA1, LL_DMA_CHANNEL_7, LL_USART_DMA_GetRegAddr(USART2, LL_USART_DMA_REG_DATA_TRANSMIT));
+  LL_USART_EnableDMAReq_TX(USART2);
+
+  LL_DMA_EnableIT_TE(DMA1, LL_DMA_CHANNEL_7);
+/*moj kod*/
+
+
+
+
 
   /* USART2 interrupt Init */
   NVIC_SetPriority(USART2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),0, 0));
@@ -95,5 +105,16 @@ void MX_USART2_UART_Init(void)
 }
 
 /* USER CODE BEGIN 1 */
+/*moj kod*/
+void USART2_PutBuffer(uint8_t *buffer, uint8_t length)
+{
+	LL_DMA_SetMemoryAddress(DMA1, LL_DMA_CHANNEL_7, (uint32_t)buffer);
 
+	LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_7, length);
+
+	LL_DMA_EnableIT_TC(DMA1, LL_DMA_CHANNEL_7);
+
+	LL_DMA_EnableChannel(DMA1, LL_DMA_CHANNEL_7);
+}
+/*moj kod*/
 /* USER CODE END 1 */
