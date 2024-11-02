@@ -29,7 +29,7 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-
+uint8_t i2c_master_read_byte(uint8_t slave_address, uint8_t register_address, uint8_t pocet_bytov);
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */
