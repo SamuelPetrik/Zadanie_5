@@ -116,8 +116,8 @@ int main(void)
   {
 	  snprintf(msg, sizeof(msg), "HTS221 not detected! Read WHO_AM_Ihmmm \r\n");
 	  USART2_PutBuffer((uint8_t *)msg, strlen(msg));
-
-
+	  snprintf(sprava, sizeof(sprava),"Teplota %0.1f, Vlhkost %d, Tlak %0.2f, Poloha %0.2f", &val_teplota, &val_vlhkost, &val_tlak, &val_poloha);
+	  USART2_PutBuffer((uint8_t*)sprava,, length)
 	/* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

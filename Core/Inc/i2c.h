@@ -29,7 +29,7 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-uint8_t i2c_master_read_byte(uint8_t slave_address, uint8_t register_address, uint8_t pocet_bytov);
+
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */
@@ -39,7 +39,9 @@ uint8_t i2c_master_read_byte(uint8_t slave_address, uint8_t register_address, ui
 void MX_I2C1_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-
+uint8_t i2c_master_read_byte(uint8_t slave_address, uint8_t register_address, uint8_t pocet_bytov);
+uint8_t i2c_master_write_byte(uint8_t slave_address, uint8_t register_address, uint8_t pocet_bytov);
+void I2C_Callback();
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

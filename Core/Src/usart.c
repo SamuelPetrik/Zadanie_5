@@ -117,4 +117,5 @@ void USART2_PutBuffer(uint8_t *buffer, uint8_t length)
 	LL_DMA_EnableChannel(DMA1, LL_DMA_CHANNEL_7);
 }
 /*moj kod*/
+
 /* USER CODE END 1 */
