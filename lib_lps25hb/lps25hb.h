@@ -24,10 +24,10 @@
 #define		LPS25HB_ADDRESS_RPDS_L				0x39
 #define		LPS25HB_ADDRESS_RPDS_H				0x3A
 
-void LPS25HB_citaj(uint8_t reg_addr);
-void LPS25HB_zapisuj(uint8_t reg_addr, uint8_t value);
-void LPS25HB_init(void);
+void lps25hb_citaj(uint8_t reg_addr);
+void lps25hb_zapisuj(uint8_t reg_addr, uint8_t value);
+void lps25hb_init(void);
 
-void LPS25HB_tlak(float* tlak);
+void lps25hb_tlak(float* tlak);
 
 #endif /* LPS25HB_H_ */

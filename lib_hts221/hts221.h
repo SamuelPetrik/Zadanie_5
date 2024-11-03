@@ -42,14 +42,14 @@
 
 //todo upravit
 //precita multibyte
-void HTS221_citaj(uint8_t reg_addr, uint8_t* values, size_t length);
+void hts221_citaj(uint8_t reg_addr, uint8_t* values, size_t length);
 //zapise multibyte
-void HTS221_zapisuj(uint8_t reg_addr, uint8_t value);
+void hts221_zapisuj(uint8_t reg_addr, uint8_t value);
 //inicializacia
-void HTS221_init(void);
+void hts221_init(void);
 //void HTS221_get_humidity_calibration(void);
-void HTS221_vlhkost(float* humidity_out);
+void hts221_vlhkost(float* humidity_out);
 //void HTS221_get_temperature_calibration(void);
-void HTS221_teplota(float* temperature_out);
+void hts221_teplota(float* temperature_out);
 
 #endif /* HTS221_H_ */

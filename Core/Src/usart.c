@@ -21,7 +21,15 @@
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
+uint8_t bufferUSART2dma[DMA_USART2_BUFFER_SIZE];
 
+static void (* USART2_ProcessData)(const uint8_t* data, uint16_t len) = 0;
+
+void USART2_RegisterCallback(void *callback){
+	if (callback != 0) {
+		USART2_ProcessData = callback;
+	}
+}
 /* USER CODE END 0 */
 
 /* USART2 init function */
@@ -77,9 +85,6 @@ void MX_USART2_UART_Init(void)
 /*moj kod*/
 
 
-
-
-
   /* USART2 interrupt Init */
   NVIC_SetPriority(USART2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),0, 0));
   NVIC_EnableIRQ(USART2_IRQn);
@@ -117,5 +122,11 @@ void USART2_PutBuffer(uint8_t *buffer, uint8_t length)
 	LL_DMA_EnableChannel(DMA1, LL_DMA_CHANNEL_7);
 }
 /*moj kod*/
-
+void resetBuffer()
+{
+    LL_DMA_DisableChannel(DMA1, LL_DMA_CHANNEL_6);
+    LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_6, DMA_USART2_BUFFER_SIZE);
+    LL_DMA_EnableChannel(DMA1, LL_DMA_CHANNEL_6);
+    //Should_load = 0;
+}
 /* USER CODE END 1 */

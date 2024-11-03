@@ -22,11 +22,16 @@
 #include "i2c.h"
 #include "usart.h"
 #include "gpio.h"
+#include "hts221.h"
+#include "lps25hb.h"
 
 
 
 char msg[100];
-
+float val_teplota;
+float val_vlhkost;
+float val_tlak;
+float val_poloha;
 
 
 
@@ -58,8 +63,16 @@ char msg[100];
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-/* USER CODE BEGIN PFP */
 
+/* USER CODE BEGIN PFP */
+float vyska(float tlak_1, float tlak_2){
+	 const float R = 8.31432;        // Univerzálna plynová konštanta v J/(mol·K)
+	 const float L = 0.0065;         // Teplotný gradient v K/m
+	 const float g = 9.80665;        // Gravitačné zrýchlenie v m/s^2
+	 const float M = 0.0289644;      // Molárna hmotnosť suchého vzduchu v kg/mol
+	 const float koef = (R * L) / (g * M);
+	 return (44330.0f * (1.0f - powf(tlak_2 / tlak_1, koef)));
+}
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -107,17 +120,29 @@ int main(void)
   MX_I2C1_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  hts221_init();
+  lps25hb_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  LL_mDelay(10);
+  lps25hb_tlak(&val_poloha);
   while (1)
   {
-	  snprintf(msg, sizeof(msg), "HTS221 not detected! Read WHO_AM_Ihmmm \r\n");
-	  USART2_PutBuffer((uint8_t *)msg, strlen(msg));
-	  snprintf(sprava, sizeof(sprava),"Teplota %0.1f, Vlhkost %d, Tlak %0.2f, Poloha %0.2f", &val_teplota, &val_vlhkost, &val_tlak, &val_poloha);
-	  USART2_PutBuffer((uint8_t*)sprava,, length)
+	  //snprintf(msg, sizeof(msg), "HTS221 not detected! Read WHO_AM_Ihmmm \r\n");
+	  //USART2_PutBuffer((uint8_t *)msg, strlen(msg));
+	  //zistenie potrebnych premennych
+	  uint8_t buffer[120];
+
+	  lps25hb_tlak(&val_tlak);
+	  hts221_vlhkost(&val_vlhkost);
+	  hts221_teplota(&val_teplota);
+	  float zdvih = vyska(val_poloha, val_tlak);
+
+	  uint8_t length = snprintf((char*)buffer, sizeof(buffer),"Teplota %.1f, Vlhkost %.0f, Tlak %.2f, Vyska %.2f\r\n", val_teplota, val_vlhkost, val_tlak, vyska); // @suppress("Float formatting support")
+	  USART2_PutBuffer(buffer, length);
+	  LL_mDelay(1000);
 	/* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

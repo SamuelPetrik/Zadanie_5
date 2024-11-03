@@ -67,7 +67,7 @@ extern "C" {
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
-
+float vyska(float tlak_1, float tlak_2);
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */

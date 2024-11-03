@@ -39,9 +39,11 @@ extern "C" {
 void MX_I2C1_Init(void);
 
 /* USER CODE BEGIN Prototypes */
-uint8_t i2c_master_read_byte(uint8_t slave_address, uint8_t register_address, uint8_t pocet_bytov);
-uint8_t i2c_master_write_byte(uint8_t slave_address, uint8_t register_address, uint8_t pocet_bytov);
-void I2C_Callback();
+void i2c_master_zapisuj(uint8_t* data, size_t length, uint8_t register_addr, uint8_t slave_addr, uint8_t read_flag);
+uint8_t* i2c_master_citaj(uint8_t *buffer, uint8_t length, uint8_t register_addr,uint8_t slave_addr, uint8_t read_flag);
+//uint8_t i2c_master_citaj(uint8_t slave_address, uint8_t register_address, uint8_t pocet_bytov);
+//uint8_t i2c_master_zapisuj(uint8_t slave_address, uint8_t register_address, uint8_t pocet_bytov);
+void I2C_master_Callback(void);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
