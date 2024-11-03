@@ -22,8 +22,9 @@
 #include "i2c.h"
 #include "usart.h"
 #include "gpio.h"
-#include "hts221.h"
 #include "lps25hb.h"
+#include "hts221.h"
+
 
 
 

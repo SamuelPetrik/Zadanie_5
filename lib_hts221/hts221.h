@@ -14,7 +14,7 @@
 #define 	HTS221_DEVICE_ADDRESS_0			0xBEU
 #define		HTS221_DEVICE_ADDRESS_1			0xBFU
 #define 	HTS221_WHO_AM_I_VALUE			0xBCU
-#define 	HTS221_WHO_AM_I_ADDRES			0x0FU
+#define 	HTS221_WHO_AM_I_ADDRESS			0x0FU
 
 #define		HTS221_CTRL_REG1				0x20
 
@@ -42,11 +42,12 @@
 
 //todo upravit
 //precita multibyte
-void hts221_citaj(uint8_t reg_addr, uint8_t* values, size_t length);
+void hts221_citaj(uint8_t adresa_registra, uint8_t* hodnoty, size_t dlzka);
 //zapise multibyte
-void hts221_zapisuj(uint8_t reg_addr, uint8_t value);
+void hts221_zapisuj(uint8_t adresa_registra, uint8_t* hodnoty, size_t dlzka);
 //inicializacia
 void hts221_init(void);
+
 //void HTS221_get_humidity_calibration(void);
 void hts221_vlhkost(float* humidity_out);
 //void HTS221_get_temperature_calibration(void);

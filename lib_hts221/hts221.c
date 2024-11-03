@@ -5,7 +5,7 @@
  *      Author: petri
  */
 
-#include "i2c.h"
+//#include "i2c.h"
 #include "hts221.h"
 
 uint8_t adresa_hts221 = HTS221_DEVICE_ADDRESS_0;
@@ -14,12 +14,11 @@ float HTS221_HumidityZero;
 float HTS221_TemperatureSlope;
 float HTS221_TemperatureZero;
 
-// Read multiple bytes
+//citanie
 void hts221_citaj(uint8_t adresa_registra, uint8_t* hodnoty, size_t dlzka) {
     i2c_master_citaj(hodnoty, dlzka, adresa_registra, adresa_hts221, 1);
 }
-
-// Write multiple bytes
+//zapisovanie
 void hts221_zapisuj(uint8_t adresa_registra, uint8_t* hodnoty, size_t dlzka) {
     i2c_master_zapisuj(hodnoty, dlzka, adresa_registra, adresa_hts221, 0);
 }
@@ -35,7 +34,7 @@ void hts221_init(void) {
     }
 
     uint8_t ctrl_setting = 134;
-    hts221_zapisuj(HTS221_CTRL1, &ctrl_setting, 1);
+    hts221_zapisuj(HTS221_CTRL_REG1, &ctrl_setting, 1);
 }
 
 // Combined humidity calibration and reading function
@@ -47,7 +46,7 @@ void hts221_vlhkost(float* vystup_vlhkost) {
         uint8_t h0T0Out_data[2], h1T0Out_data[2]; // Buffers for H0_T0_OUT and H1_T0_OUT
         int16_t h0_t0_out, h1_t0_out;
 
-        hts221_citaj(adresa_registra, hodnoty, dlzka)(HTS221_H0_rH_x2 | 0x80, calibration_data, 2);
+        hts221_citaj(HTS221_H0_rH_x2 | 0x80, calibration_data, 2);
         uint8_t h0_rH = calibration_data[0] >> 1;
         uint8_t h1_rH = calibration_data[1] >> 1;
 

@@ -173,7 +173,7 @@ void I2C1_Master_Callback(void) {
 
 
 //povolene
-void I2C1_EV_IRQHandler(void)
+/*void I2C1_EV_IRQHandler(void)
 {
 	// Check RXNE flag value in ISR register
 	if(LL_I2C_IsActiveFlag_RXNE(I2C1))
@@ -181,6 +181,6 @@ void I2C1_EV_IRQHandler(void)
 		// Call function Master Reception Callback
 		i2c_rx_data = LL_I2C_ReceiveData8(I2C1);
 	}
-}
+}*/
 //povolene
 /* USER CODE END 1 */
