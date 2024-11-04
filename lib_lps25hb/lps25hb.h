@@ -28,8 +28,8 @@
 void lps25hb_citaj(uint8_t adresa_registra, uint8_t* hodnoty, size_t dlzka);
 void lps25hb_zapisuj(uint8_t adresa_registra, uint8_t* hodnoty, size_t dlzka);
 void lps25hb_init(void);
-void LPS25HB_get_pressure_calibration(void);
-void LPS25HB_get_pressure(float* pressure);
+void lps25hb_get_pressure_calibration(void);
+void lps25hb_get_pressure(float* pressure);
 
 //void lps25hb_tlak(float* tlak);
 

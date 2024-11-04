@@ -128,7 +128,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   LL_mDelay(10);
-  lps25hb_tlak(&val_poloha);
+  lps25hb_get_pressure(&val_poloha);
   while (1)
   {
 	  //snprintf(msg, sizeof(msg), "HTS221 not detected! Read WHO_AM_Ihmmm \r\n");
@@ -136,7 +136,7 @@ int main(void)
 	  //zistenie potrebnych premennych
 	  uint8_t buffer[120];
 
-	  lps25hb_tlak(&val_tlak);
+	  lps25hb_get_pressure(&val_tlak);
 	  hts221_vlhkost(&val_vlhkost);
 	  hts221_teplota(&val_teplota);
 	  float zdvih = vyska(val_poloha, val_tlak);
