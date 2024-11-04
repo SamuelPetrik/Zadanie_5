@@ -139,7 +139,7 @@ uint8_t* i2c_master_citaj(uint8_t *buffer, uint8_t dlzka, uint8_t adresa_registr
 	citanie = 0;
 	LL_I2C_EnableIT_RX(I2C1);
 
-	//poziadam slejva o citanie z jeho registra
+	//poziadam slave o citanie z jeho registra
 	LL_I2C_HandleTransfer(I2C1, slave, LL_I2C_ADDRSLAVE_7BIT, 1,
 			LL_I2C_MODE_AUTOEND, LL_I2C_GENERATE_START_WRITE);
 	while (!LL_I2C_IsActiveFlag_STOP(I2C1)) {
@@ -150,7 +150,7 @@ uint8_t* i2c_master_citaj(uint8_t *buffer, uint8_t dlzka, uint8_t adresa_registr
 	LL_I2C_ClearFlag_STOP(I2C1);
 	while (LL_I2C_IsActiveFlag_STOP(I2C1)) {
 	}
-	//citam register od slejva
+	//citam register od slave
 	LL_I2C_HandleTransfer(I2C1, slave, LL_I2C_ADDRSLAVE_7BIT, dlzka,
 			LL_I2C_MODE_AUTOEND, LL_I2C_GENERATE_START_READ);
 	while (!LL_I2C_IsActiveFlag_STOP(I2C1)) {

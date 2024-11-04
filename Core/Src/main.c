@@ -72,7 +72,7 @@ float vyska(float tlak_1, float tlak_2){
 	 const float g = 9.80665;        // Gravitačné zrýchlenie v m/s^2
 	 const float M = 0.0289644;      // Molárna hmotnosť suchého vzduchu v kg/mol
 	 const float koef = (R * L) / (g * M);
-	 return (44330.0f * (1.0f - powf(tlak_2 / tlak_1, koef)));
+	 return (44330.0f * (1.0f - pow(tlak_2 / tlak_1, koef)));
 }
 /* USER CODE END PFP */
 

@@ -73,14 +73,14 @@ void lps25hb_tlak(float* tlak) {
     *tlak = p_out / 4096.0f;
 }*/
 void lps25hb_init() {
-    uint8_t whoAmI = 0;
-    lps25hb_citaj(LPS25HB_WHO_AM_I_ADDRESS, &whoAmI, 1);
+    uint8_t zistenie_senzoru = 0;
+    lps25hb_citaj(LPS25HB_WHO_AM_I_ADDRESS, &zistenie_senzoru, 1);
 
-    if (!(whoAmI == LPS25HB_WHO_AM_I_VALUE)) {
+    if (!(zistenie_senzoru == LPS25HB_WHO_AM_I_VALUE)) {
         LPS25HB_address = LPS25HB_DEVICE_ADDRESS_1;
 
-        lps25hb_citaj(LPS25HB_WHO_AM_I_ADDRESS, &whoAmI, 1);
-        if (whoAmI == LPS25HB_WHO_AM_I_VALUE) {
+        lps25hb_citaj(LPS25HB_WHO_AM_I_ADDRESS, &zistenie_senzoru, 1);
+        if (zistenie_senzoru == LPS25HB_WHO_AM_I_VALUE) {
             uint8_t ctrl1 = 148;
             lps25hb_zapisuj(LPS25HB_ADDRESS_CTRL1, &ctrl1, 1);
             lps25hb_get_pressure_calibration();
