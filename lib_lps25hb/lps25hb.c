@@ -83,13 +83,13 @@ void lps25hb_init() {
         if (zistenie_senzoru == LPS25HB_WHO_AM_I_VALUE) {
             uint8_t ctrl1 = 148;
             lps25hb_zapisuj(LPS25HB_ADDRESS_CTRL1, &ctrl1, 1);
-            lps25hb_get_pressure_calibration();
+            lps25hb_tlak_kalibracia();
         }
     }
 }
 
 
-void lps25hb_get_pressure_calibration(void){
+void lps25hb_tlak_kalibracia(void){
     uint8_t buffer[2];
     // Read two bytes from RPDS_L register with auto-increment to RPDS_H
     lps25hb_citaj(LPS25HB_ADDRESS_RPDS_L | 0x80, buffer, 2);
@@ -98,7 +98,7 @@ void lps25hb_get_pressure_calibration(void){
     LPS25HB_PressureOffset = (int16_t)(buffer[0] | (buffer[1] << 8));
 }
 
-void lps25hb_get_pressure(float* pressure) {
+void lps25hb_tlak(float* pressure) {
     uint8_t buffer[3];
     // Read three bytes from PRESS_OUT_XL register with auto-increment to PRESS_OUT_H
     lps25hb_citaj(LPS25HB_ADDRESS_PRESS_OUT_XL | 0x80, buffer, 3);
